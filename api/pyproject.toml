@@ -8,6 +8,7 @@ authors = ["Evan Rittenhouse <evanrittenhouse@gmail.com>"]
 python = "^3.8"
 Flask = "^2.0.2"
 python-dotenv = "^0.19.1"
+requests = "^2.26.0"
 
 [tool.poetry.dev-dependencies]
 
