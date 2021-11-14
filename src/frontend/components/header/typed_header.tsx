@@ -2,7 +2,12 @@ import { FC, useRef, useEffect } from 'react';
 import Typed, { TypedOptions } from 'typed.js'; // thank you to www.mattboldt.com
 import '../../css/main.css';
 
-const TypedHeader: FC = () => {
+interface HeaderTypingProps {
+  element?: string;
+  strings: string[];
+}
+
+function HeaderTyping({ element, strings }: HeaderTypingProps) {
   // // store a ref for the element containing the animation
   const el = useRef<HTMLElement>(null);
   // // store a ref for the typed instance itself
@@ -10,11 +15,12 @@ const TypedHeader: FC = () => {
 
   useEffect(() => {
     const options: TypedOptions = {
-      strings: ['Pacific Data Management', 'test'],
-      typeSpeed: 40,
+      strings: strings,
+      typeSpeed: 50,
       backSpeed: 50,
       loop: false,
       cursorChar: '|',
+      stringsElement: '#test',
     };
 
     // elRef refers to the <span> rendered below
@@ -25,13 +31,13 @@ const TypedHeader: FC = () => {
       // to prevent memory leaks
       typed.current.destroy();
     };
-  }, []);
+  }, [strings]);
 
   return (
     <header className="wrap test">
       <span style={{ whiteSpace: 'pre' }} ref={el} />
     </header>
   );
-};
+}
 
-export default TypedHeader;
+export default HeaderTyping;

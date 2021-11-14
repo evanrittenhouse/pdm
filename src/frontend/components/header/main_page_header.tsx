@@ -1,11 +1,12 @@
-import { FC } from 'react';
-import TypedHeader from './typed_header';
+import React from 'react';
+import HeaderTyping from './typed_header';
 import '../../App.css';
+import '../../css/main.css';
 
-const MainPageHeader: FC = () => {
+const MainPageHeader: React.FC = () => {
   return (
     <div className="App-header">
-      <TypedHeader />
+      <HeaderTyping strings={['Pacific Data Management\nMove your data forward']} />
     </div>
   );
 };
