@@ -26,3 +26,6 @@ __pycache__/
 .venv/
 api/__pycache__/
 api/.venv
+.vscode/
+node_modules/
+

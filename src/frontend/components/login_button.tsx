@@ -1,7 +1,9 @@
 function LoginButton() {
   return (
     <div>
-      <a href='http://localhost:5000/login'>click me</a>
+      <a href='http://localhost:5000/login'>
+        <button>click me</button>
+      </a>
     </div>
   );
 }
