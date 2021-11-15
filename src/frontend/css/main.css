@@ -2,28 +2,26 @@
   position: fixed;
   background-color: #282c34;
   overflow: auto;
-  width: 100%;
-  padding: 0;
-  margin: 0 0 3em 0;
   top: 0;
+  left: 0;
+  display: inline-block;
 }
 
 #nav li {
   float: left;
 }
 
+#button-a-copy,
 #nav li a {
   display: block;
   padding: 8px 15px;
-  font-weight: bold;
   text-decoration: none;
-  color: black;
   border-right: 1px solid #ccc;
 }
 
-#contact-button {
-  float: right;
-  display: block;
-  color: yellow;
-  vertical-align: center;
+#button-a-copy {
+  font-weight: bold;
+  font-size: 1.5em;
+  border-right: none;
+  padding-right: 1em;
 }
