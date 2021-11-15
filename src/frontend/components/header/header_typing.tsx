@@ -3,10 +3,10 @@ import Typed, { TypedOptions } from 'typed.js'; // thank you to www.mattboldt.co
 import '../../css/main.css';
 
 interface HeaderTypingProps {
-  strings: string[];
+  string: string;
 }
 
-function HeaderTyping({ strings }: HeaderTypingProps) {
+function HeaderTyping({ string }: HeaderTypingProps) {
   // // store a ref for the element containing the animation
   const elRef = useRef<HTMLElement>(null);
   // // store a ref for the typed instance itself
@@ -14,10 +14,11 @@ function HeaderTyping({ strings }: HeaderTypingProps) {
 
   useEffect(() => {
     const options: TypedOptions = {
-      strings: strings,
+      strings: [string],
       typeSpeed: 60,
       loop: false,
       cursorChar: '|',
+      showCursor: true,
     };
 
     // elRef refers to the <span> rendered below
@@ -28,7 +29,7 @@ function HeaderTyping({ strings }: HeaderTypingProps) {
       // to prevent memory leaks
       typed.current.destroy();
     };
-  }, [strings]);
+  }, [string]);
 
   return <span style={{ whiteSpace: 'pre' }} ref={elRef} />;
 }
