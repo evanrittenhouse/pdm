@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import '../css/main.css';
 
 interface NavBarType {
@@ -11,12 +11,12 @@ interface LinkProps {
 }
 
 function NavBar({ showingHeader = true }: NavBarType) {
-  // TODO: add header ref
+  // TODO: make contact button work, routes won't render for some reason
   // float contact-button right
   const [headerTextColor, setHeaderTextColor] = useState('white');
 
   useEffect(() => {
-    let headerTextColorTemp = showingHeader ? 'white' : 'black';
+    const headerTextColorTemp = showingHeader ? 'white' : 'black';
     setHeaderTextColor(headerTextColorTemp);
   }, [showingHeader]);
 
@@ -47,21 +47,8 @@ function NavBar({ showingHeader = true }: NavBarType) {
           </Link>
         </li>
       </ul>
-      <Routes>
-        <Route path='/clients' element={<Test />}></Route>
-        <Route path='/about' element={<Test />}></Route>
-        <Route path='/team' element={<Test />}></Route>
-      </Routes>
     </div>
   );
 }
 
 export default NavBar;
-
-function Test() {
-  return (
-    <div>
-      <p style={{ color: 'white', backgroundColor: 'red' }}>test</p>
-    </div>
-  );
-}

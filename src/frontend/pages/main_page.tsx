@@ -1,6 +1,6 @@
 import NavBar from '../components/nav_bar';
-import HeaderTyping from '../components/header/header_typing';
-import { BrowserRouter as Router } from 'react-router-dom';
+import HeaderTyping from '../components/header_typing';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import '../App.css';
 import '../css/main.css';
 
@@ -8,7 +8,14 @@ function Main() {
   return (
     <div className='App'>
       <Router>
-        <NavBar showingHeader={true} />
+        <div>
+          <NavBar showingHeader={true} />
+        </div>
+        <Routes>
+          <Route path='/clients' element={<Test />}></Route>
+          <Route path='/about' element={<Test />}></Route>
+          <Route path='/team' element={<Test />}></Route>
+        </Routes>
       </Router>
       <div>
         <header className='App-header'>
@@ -20,3 +27,11 @@ function Main() {
 }
 
 export default Main;
+
+function Test() {
+  return (
+    <div>
+      <p style={{ color: 'white', backgroundColor: 'red' }}>test</p>
+    </div>
+  );
+}
