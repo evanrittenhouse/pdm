@@ -1,9 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { HashLink } from 'react-router-hash-link';
+import { useState, useEffect } from 'react';
+import { Routes, Route, Link } from 'react-router-dom';
 import '../css/main.css';
 
 interface NavBarType {
   showingHeader: boolean;
+}
+
+interface LinkProps {
+  pathName: string;
 }
 
 function NavBar({ showingHeader = true }: NavBarType) {
@@ -18,33 +22,46 @@ function NavBar({ showingHeader = true }: NavBarType) {
 
   return (
     <div>
-      <ul id="nav" style={{ color: headerTextColor }} className="container-fluid">
+      <ul id='nav' style={{ color: headerTextColor }} className='container-fluid'>
         <li>
-          <button id="button-a-copy">PDM</button>
+          <button id='button-a-copy'>PDM</button>
         </li>
         <li>
-          <Link to="#clients" style={{ color: headerTextColor }}>
+          <Link to='/clients' style={{ color: headerTextColor }}>
             Clients
           </Link>
         </li>
         <li>
-          <a href="#about" style={{ color: headerTextColor }}>
+          <Link to='/about' style={{ color: headerTextColor }}>
             About
-          </a>
+          </Link>
         </li>
         <li>
-          <a href="#team" style={{ color: headerTextColor }}>
+          <Link to='/team' style={{ color: headerTextColor }}>
             Team
-          </a>
+          </Link>
         </li>
         <li>
-          <a href="#contact" style={{ color: headerTextColor }} className="ms-auto">
-            <button id="contact-button">Contact Us</button>
-          </a>
+          <Link to='/contact' style={{ color: headerTextColor }} className='ms-auto'>
+            <button id='contact-button'>Contact Us</button>
+          </Link>
         </li>
       </ul>
+      <Routes>
+        <Route path='/clients' element={<Test />}></Route>
+        <Route path='/about' element={<Test />}></Route>
+        <Route path='/team' element={<Test />}></Route>
+      </Routes>
     </div>
   );
 }
 
 export default NavBar;
+
+function Test() {
+  return (
+    <div>
+      <p style={{ color: 'white', backgroundColor: 'red' }}>test</p>
+    </div>
+  );
+}
