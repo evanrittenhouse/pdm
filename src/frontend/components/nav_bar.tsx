@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { HashLink } from 'react-router-hash-link';
 import '../css/main.css';
 
 interface NavBarType {
@@ -22,22 +23,22 @@ function NavBar({ showingHeader = true }: NavBarType) {
           <button id="button-a-copy">PDM</button>
         </li>
         <li>
-          <a href="/about" style={{ color: headerTextColor }}>
+          <Link to="#clients" style={{ color: headerTextColor }}>
+            Clients
+          </Link>
+        </li>
+        <li>
+          <a href="#about" style={{ color: headerTextColor }}>
             About
           </a>
         </li>
         <li>
-          <a href="/clients" style={{ color: headerTextColor }}>
-            Clients
-          </a>
-        </li>
-        <li>
-          <a href="/team" style={{ color: headerTextColor }}>
+          <a href="#team" style={{ color: headerTextColor }}>
             Team
           </a>
         </li>
         <li>
-          <a href="/contact" style={{ color: headerTextColor }} className="ms-auto">
+          <a href="#contact" style={{ color: headerTextColor }} className="ms-auto">
             <button id="contact-button">Contact Us</button>
           </a>
         </li>

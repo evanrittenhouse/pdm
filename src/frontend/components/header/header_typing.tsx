@@ -18,7 +18,7 @@ function HeaderTyping({ string }: HeaderTypingProps) {
       typeSpeed: 60,
       loop: false,
       cursorChar: '|',
-      showCursor: true,
+      showCursor: false,
     };
 
     // elRef refers to the <span> rendered below
