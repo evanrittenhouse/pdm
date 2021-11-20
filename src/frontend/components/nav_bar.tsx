@@ -55,20 +55,8 @@ function NavButton({ navLocation, buttonColor = 'white' }: NavButtonType) {
   }
 
   return (
-    <button onClick={handleClick} style={{ color: buttonColor }}>
+    <button onClick={handleClick} className="navButton" style={{ color: buttonColor }}>
       Contact Us
     </button>
-  );
-}
-
-export function ClientsPage() {
-  return (
-    <div className="container">
-      <Link to="/team">
-        <p>Vodafone</p>
-      </Link>
-      <p>Agritech</p>
-      <p>SJJS</p>
-    </div>
   );
 }

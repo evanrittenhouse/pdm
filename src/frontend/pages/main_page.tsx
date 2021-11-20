@@ -1,28 +1,26 @@
-import NavBar, { ClientsPage } from '../components/nav_bar';
+import NavBar from '../components/nav_bar';
+import ClientsPage from '../components/clients_page';
+import TeamPage from '../components/team';
 import HeaderTyping from '../components/header_typing';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import { useEffect } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import '../App.css';
 import '../css/main.css';
 
-function Main() {
+function App() {
   return (
     <div className="App">
       <Router>
+        <NavBar showingHeader={true} />
         <div>
-          <NavBar showingHeader={true} />
+          <Routes>
+            <Route path="/" element={<HeaderTyping string={'<b>Pacific Data Management, Inc.</b>\nMove your data forward.'} />} />
+            <Route path="/clients" element={<ClientsPage />}></Route>
+            <Route path="/team" element={<TeamPage />} />
+          </Routes>
         </div>
-        <div>
-          <header className="App-header">
-            <HeaderTyping string={'<b>Pacific Data Management, Inc.</b>\nMove your data forward.'} />
-          </header>
-        </div>
-        <Routes>
-          <Route path="/clients" element={<ClientsPage />}></Route>
-        </Routes>
       </Router>
     </div>
   );
 }
 
-export default Main;
+export default App;

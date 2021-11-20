@@ -1,5 +1,5 @@
 #nav {
-  position: fixed;
+  position: sticky;
   background-color: #282c34;
   overflow: auto;
   top: 0;
