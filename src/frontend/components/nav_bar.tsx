@@ -1,16 +1,17 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../css/main.css';
 
 interface NavBarType {
   showingHeader: boolean;
 }
 
-interface LinkProps {
-  pathName: string;
+interface NavButtonType {
+  navLocation: string;
+  buttonColor?: string;
 }
 
-function NavBar({ showingHeader = true }: NavBarType) {
+export default function NavBar({ showingHeader = true }: NavBarType) {
   // TODO: make contact button work, routes won't render for some reason
   // float contact-button right
   const [headerTextColor, setHeaderTextColor] = useState('white');
@@ -22,28 +23,23 @@ function NavBar({ showingHeader = true }: NavBarType) {
 
   return (
     <div>
-      <ul id='nav' style={{ color: headerTextColor }} className='container-fluid'>
+      <ul id="nav" style={{ color: headerTextColor }} className="container-fluid">
         <li>
-          <button id='button-a-copy'>PDM</button>
+          <Link to="/" id="button-a-copy">
+            PDM
+          </Link>
         </li>
         <li>
-          <Link to='/clients' style={{ color: headerTextColor }}>
+          <Link to="/clients" style={{ color: headerTextColor }}>
             Clients
           </Link>
         </li>
         <li>
-          <Link to='/about' style={{ color: headerTextColor }}>
-            About
-          </Link>
+          <NavButton navLocation={'/about'} />
         </li>
         <li>
-          <Link to='/team' style={{ color: headerTextColor }}>
+          <Link to="/team" style={{ color: headerTextColor }}>
             Team
-          </Link>
-        </li>
-        <li>
-          <Link to='/contact' style={{ color: headerTextColor }} className='ms-auto'>
-            <button id='contact-button'>Contact Us</button>
           </Link>
         </li>
       </ul>
@@ -51,4 +47,28 @@ function NavBar({ showingHeader = true }: NavBarType) {
   );
 }
 
-export default NavBar;
+function NavButton({ navLocation, buttonColor = 'white' }: NavButtonType) {
+  const navigate = useNavigate();
+
+  function handleClick(): void {
+    navigate(navLocation);
+  }
+
+  return (
+    <button onClick={handleClick} style={{ color: buttonColor }}>
+      Contact Us
+    </button>
+  );
+}
+
+export function ClientsPage() {
+  return (
+    <div className="container">
+      <Link to="/team">
+        <p>Vodafone</p>
+      </Link>
+      <p>Agritech</p>
+      <p>SJJS</p>
+    </div>
+  );
+}
