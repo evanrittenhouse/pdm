@@ -1,6 +1,7 @@
 import { useRef, useEffect } from 'react';
 import Typed, { TypedOptions } from 'typed.js'; // thank you to www.mattboldt.com
 import '../css/main.css';
+import '../App.css';
 
 interface HeaderTypingProps {
   string: string;
@@ -31,7 +32,7 @@ function HeaderTyping({ string }: HeaderTypingProps) {
     };
   }, [string]);
 
-  return <span style={{ whiteSpace: 'pre' }} ref={elRef} />;
+  return <span className="App-header" style={{ whiteSpace: 'pre' }} ref={elRef} />;
 }
 
 export default HeaderTyping;

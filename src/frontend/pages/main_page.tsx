@@ -13,7 +13,7 @@ function App() {
         <NavBar showingHeader={true} />
         <div>
           <Routes>
-            <Route path="/" element={<HeaderTyping string={'<b>Pacific Data Management, Inc.</b>\nMove your data forward.'} />} />
+            <Route path="/" element={<HeaderTyping string={'<b>Pacific Data Management, Inc.</b>Move your data forward.'} />} />
             <Route path="/clients" element={<ClientsPage />}></Route>
             <Route path="/team" element={<TeamPage />} />
           </Routes>

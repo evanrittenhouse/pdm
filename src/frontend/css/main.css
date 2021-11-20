@@ -11,17 +11,17 @@
   float: left;
 }
 
-#button-a-copy,
-#nav li a {
+#nav li:not(:first-child) {
   display: block;
   padding: 8px 15px;
   text-decoration: none;
   border-right: 1px solid #ccc;
 }
 
-#button-a-copy {
+#nav li #button-a-copy {
   font-weight: bold;
   font-size: 1.5em;
   border-right: none;
   padding-right: 1em;
+  border-right: 1px solid #ccc;
 }

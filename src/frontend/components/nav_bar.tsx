@@ -22,7 +22,7 @@ export default function NavBar({ showingHeader = true }: NavBarType) {
   }, [showingHeader]);
 
   return (
-    <div>
+    <div id="App-header">
       <ul id="nav" style={{ color: headerTextColor }} className="container-fluid">
         <li>
           <Link to="/" id="button-a-copy">
