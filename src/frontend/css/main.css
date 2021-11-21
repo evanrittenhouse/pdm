@@ -25,3 +25,20 @@
   padding-right: 1em;
   border-right: 1px solid #ccc;
 }
+
+/* client page css */
+.image-container {
+  background-size: cover;
+  padding: 4rem 2rem;
+  display: grid;
+  align-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.image-container > .image {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  grid-template-rows: repeat(6, 200px);
+  grid-gap: 1rem;
+  grid-auto-flow: dense;
+}
