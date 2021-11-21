@@ -26,10 +26,10 @@ interface ImageBoxProps {
 function ImageBox({ imagePath, clientPath, clientName }: ImageBoxProps) {
   return (
     <div>
-      <Link to={clientPath}>
+      <a href={clientPath}>
         <img className="image" src={imagePath} alt={clientName} />
         <p>{clientName}</p>
-      </Link>
+      </a>
     </div>
   );
 }
