@@ -1,3 +1,19 @@
+/* row and column helpers */
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+}
+
+/* nav bar css */
 #nav {
   position: sticky;
   background-color: #282c34;
@@ -26,6 +42,11 @@
   border-right: 1px solid #ccc;
 }
 
+.nav-link-element {
+  color: white;
+  border-right: 2px solid white;
+}
+
 /* client page css */
 .image-container {
   background-size: cover;
@@ -33,12 +54,14 @@
   display: grid;
   align-items: center;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-gap: 40px;
 }
 
-.image-container > .image {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  grid-template-rows: repeat(6, 200px);
-  grid-gap: 1rem;
-  grid-auto-flow: dense;
+.image {
+  transition: all 0.2s ease-in-out;
+  padding: 20px;
+}
+
+.image:hover {
+  transform: scale(1.1);
 }
