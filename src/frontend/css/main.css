@@ -1,4 +1,8 @@
 /* row and column helpers */
+html,
+body {
+  padding-top: 20px;
+}
 .row {
   display: flex;
   flex-direction: row;
@@ -44,7 +48,14 @@
 
 .nav-link-element {
   color: white;
-  border-right: 2px solid white;
+  font-size: 1.2em;
+  border-radius: 5px;
+}
+
+.nav-link-element:hover {
+  color: #282c34;
+  background-color: white;
+  transition: all 0.5s ease-in-out;
 }
 
 /* client page css */
