@@ -3,16 +3,12 @@ import ClientsPage from './pages/clients_page';
 import TeamPage from './pages/team_page';
 import HomePage from './pages/home_page';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import './App.css';
 import './css/main.css';
 
 function App() {
   // TODO: implement paddingTop to be the height of the navBar - currently a placeholder of 20px
-  // useEffect(
-
-  //     );
-
   return (
     <div className="App">
       <Router>

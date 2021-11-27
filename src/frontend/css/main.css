@@ -1,8 +1,24 @@
-/* row and column helpers */
 html,
 body {
-  padding-top: 20px;
+  margin-top: 20px;
 }
+
+:root {
+  --main-color: #282c34;
+}
+
+.header {
+  padding-top: 30px;
+  font-weight: bold;
+  font-size: 3em;
+}
+
+.header2 {
+  padding-top: 30px;
+  font-weight: bold;
+  font-size: 2em;
+}
+
 .row {
   display: flex;
   flex-direction: row;
@@ -18,34 +34,6 @@ body {
 }
 
 /* nav bar css */
-#nav {
-  position: sticky;
-  background-color: #282c34;
-  overflow: auto;
-  top: 0;
-  left: 0;
-  display: inline-block;
-}
-
-#nav li {
-  float: left;
-}
-
-#nav li:not(:first-child) {
-  display: block;
-  padding: 8px 15px;
-  text-decoration: none;
-  border-right: 1px solid #ccc;
-}
-
-#nav li #button-a-copy {
-  font-weight: bold;
-  font-size: 1.5em;
-  border-right: none;
-  padding-right: 1em;
-  border-right: 1px solid #ccc;
-}
-
 .nav-link-element {
   color: white;
   font-size: 1.2em;
@@ -53,18 +41,34 @@ body {
 }
 
 .nav-link-element:hover {
-  color: #282c34;
+  color: var(--main-color);
   background-color: white;
   transition: all 0.5s ease-in-out;
 }
 
+#contact-us-button {
+  background-color: white;
+  color: var(--main-color);
+  font-weight: bold;
+  font-size: 1.2em;
+  padding-left: 20px;
+  transition: all 0.5s ease-in-out;
+}
+
+#contact-us-button:hover {
+  transform: scale(1.1);
+}
+
 /* client page css */
+/*grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));*/
 .image-container {
   background-size: cover;
   padding: 4rem 2rem;
-  display: grid;
+  height: 80%;
+  width: 80%;
+  display: inline-grid;
   align-items: center;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-gap: 40px;
 }
 
@@ -75,4 +79,9 @@ body {
 
 .image:hover {
   transform: scale(1.1);
+}
+
+/* employee page */
+.divider-line {
+  border-top: 3px solid #282c34;
 }

@@ -1,12 +1,13 @@
+import { john, dave, dan } from '../components/employee_background_index';
+import EmployeeSection from '../components/employee_section';
+
 export default function TeamPage() {
   return (
     <div>
-      <p>
-        John Beaulieu, Dave Terry, and Dan Wasserman are principals in Pacific Data Management, Inc. They started their database careers at ACI US,
-        Inc. the publisher of 4th Dimension®. Having leveraged their early Macintosh experience, they now provide a full range of database development
-        services. PDM develops client/server solutions using the best tools available such as FileMaker Pro®, 4th Dimension®, MSSQLServer®, Oracle®
-        and Sybase®.
-      </p>
+      <h1 className='header'>PDM Partners</h1>
+      <EmployeeSection name='John Beaulieu' background={john} />
+      <EmployeeSection name='Dave Terry' background={dave} />
+      <EmployeeSection name='Dan Wasserman' background={dan} />
     </div>
   );
 }

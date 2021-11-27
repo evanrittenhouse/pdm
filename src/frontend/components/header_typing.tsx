@@ -8,9 +8,9 @@ interface HeaderTypingProps {
 }
 
 function HeaderTyping({ string }: HeaderTypingProps) {
-  // // store a ref for the element containing the animation
+  // store a ref for the element containing the animation
   const elRef = useRef<HTMLElement>(null);
-  // // store a ref for the typed instance itself
+  // store a ref for the typed instance itself
   const typed = useRef<Typed | null>(null);
 
   useEffect(() => {
@@ -32,7 +32,7 @@ function HeaderTyping({ string }: HeaderTypingProps) {
     };
   }, [string]);
 
-  return <span className="App-header" style={{ whiteSpace: 'pre' }} ref={elRef} />;
+  return <span className='App-header' style={{ whiteSpace: 'pre', width: '100%' }} ref={elRef} />;
 }
 
 export default HeaderTyping;
