@@ -83,5 +83,6 @@ body {
 
 /* employee page */
 .divider-line {
-  border-top: 3px solid #282c34;
+  border-top: 3px solid var(--main-color);
+  border-radius: 5px;
 }
