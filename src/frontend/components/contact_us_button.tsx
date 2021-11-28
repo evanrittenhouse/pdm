@@ -12,10 +12,6 @@ export default function ContactUsButton() {
   const handleClick = (e: MouseEvent<HTMLButtonElement>): void => {
     showModalState(!showModal);
     toggleScrollLock();
-
-    // if (showModal === true) {
-    //   document.querySelector('html').classList.toggle('scroll-lock');
-    // }
   };
 
   const toggleScrollLock = (): void => {
