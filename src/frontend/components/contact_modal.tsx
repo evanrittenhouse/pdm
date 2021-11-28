@@ -8,8 +8,9 @@ interface ContactModalProps {
   closeButtonRef: any;
 }
 
-// object for creating and sending email
+// interface for creating and sending email
 interface EmailProps {
+  [key: string]: string | number;
   returnAddress: string;
   returnName: string;
   subjectCompany: string;
@@ -53,7 +54,7 @@ const ContactUsModal = ({ shown, stateFunc, modalRef, closeButtonRef }: ContactM
 
 const ContactUsForm = () => {
   // TODO: lift state up into the main modal element since it contains the submit button
-  const [emailState, setEmailState] = useState<EmailProps>({
+  const [formState, setFormState] = useState<EmailProps>({
     returnAddress: '',
     returnName: '',
     subjectCompany: '',
@@ -63,8 +64,8 @@ const ContactUsForm = () => {
   const handleInputChange = (e: any): void => {
     const { name, value } = e.currentTarget as HTMLInputElement | HTMLTextAreaElement;
 
-    setEmailState({
-      ...emailState,
+    setFormState({
+      ...formState,
       [name]: value,
     });
   };
@@ -73,19 +74,19 @@ const ContactUsForm = () => {
     <form>
       <label>
         Name:
-        <input name='return-name' type='text' value={emailState.returnAddress} onChange={handleInputChange} />
+        <input name='returnName' type='text' value={formState.returnName} onChange={handleInputChange} />
       </label>
       <label>
         Company Name:
-        <input name='subject-company' type='text' value={emailState.subjectCompany} onChange={handleInputChange} />
+        <input name='subjectCompany' type='text' value={formState.subjectCompany} onChange={handleInputChange} />
       </label>
       <label>
         Contact Email:
-        <input name='return-address' type='text' value={emailState.returnAddress} onChange={handleInputChange} />
+        <input name='returnAddress' type='text' value={formState.returnAddress} onChange={handleInputChange} />
       </label>
       <label>
         Use Case:
-        <textarea name='use-case' value={emailState.useCase} onChange={handleInputChange} />
+        <textarea name='useCase' value={formState.useCase} onChange={handleInputChange} />
       </label>
     </form>
   );
