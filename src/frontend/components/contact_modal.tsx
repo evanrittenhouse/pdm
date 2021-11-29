@@ -9,7 +9,7 @@ interface ContactModalProps {
 }
 
 // interface for creating and sending email
-interface EmailProps {
+interface FormProps {
   [key: string]: string | number;
   returnAddress: string;
   returnName: string;
@@ -18,6 +18,13 @@ interface EmailProps {
 }
 
 const ContactUsModal = ({ shown, stateFunc, modalRef, closeButtonRef }: ContactModalProps) => {
+  const [formState, setFormState] = useState<FormProps>({
+    returnAddress: '',
+    returnName: '',
+    subjectCompany: '',
+    useCase: '',
+  });
+
   useEffect(() => {
     document.addEventListener('keydown', onKeyDown, false);
 
@@ -26,40 +33,10 @@ const ContactUsModal = ({ shown, stateFunc, modalRef, closeButtonRef }: ContactM
     };
   });
 
-  const close = () => stateFunc(false);
+  const close = (): void => stateFunc(false);
   const onKeyDown = (event: KeyboardEvent): void => {
     if (event.key === 'Escape') stateFunc(false);
   };
-
-  return (
-    <Modal show={shown} ref={modalRef}>
-      <Modal.Header closeButton>
-        <Modal.Title>Contact Us</Modal.Title>
-      </Modal.Header>
-      <Modal.Body onClick={(e: MouseEvent) => e.stopPropagation()}>
-        Tell us how we can build the perfect database structure for your business.
-        <ContactUsForm />
-      </Modal.Body>
-      <Modal.Footer>
-        <Button variant='secondary' onClick={close}>
-          Close
-        </Button>
-        <Button variant='primary' onClick={close}>
-          Send email
-        </Button>
-      </Modal.Footer>
-    </Modal>
-  );
-};
-
-const ContactUsForm = () => {
-  // TODO: lift state up into the main modal element since it contains the submit button
-  const [formState, setFormState] = useState<EmailProps>({
-    returnAddress: '',
-    returnName: '',
-    subjectCompany: '',
-    useCase: '',
-  });
 
   const handleInputChange = (e: any): void => {
     const { name, value } = e.currentTarget as HTMLInputElement | HTMLTextAreaElement;
@@ -70,25 +47,51 @@ const ContactUsForm = () => {
     });
   };
 
+  const sendEmail = () => {
+    fetch('http://localhost:9000/testApi').then((response) => {
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+      console.log('done');
+      return;
+    });
+  };
+
   return (
-    <form>
-      <label>
-        Name:
-        <input name='returnName' type='text' value={formState.returnName} onChange={handleInputChange} />
-      </label>
-      <label>
-        Company Name:
-        <input name='subjectCompany' type='text' value={formState.subjectCompany} onChange={handleInputChange} />
-      </label>
-      <label>
-        Contact Email:
-        <input name='returnAddress' type='text' value={formState.returnAddress} onChange={handleInputChange} />
-      </label>
-      <label>
-        Use Case:
-        <textarea name='useCase' value={formState.useCase} onChange={handleInputChange} />
-      </label>
-    </form>
+    <Modal show={shown} ref={modalRef}>
+      <Modal.Header closeButton>
+        <Modal.Title>Contact Us</Modal.Title>
+      </Modal.Header>
+      <Modal.Body onClick={(e: MouseEvent) => e.stopPropagation()}>
+        Tell us how we can build the perfect database structure for your business.
+        <form>
+          <label>
+            Name:
+            <input name="returnName" type="text" value={formState.returnName} onChange={handleInputChange} />
+          </label>
+          <label>
+            Company Name:
+            <input name="subjectCompany" type="text" value={formState.subjectCompany} onChange={handleInputChange} />
+          </label>
+          <label>
+            Contact Email:
+            <input name="returnAddress" type="text" value={formState.returnAddress} onChange={handleInputChange} />
+          </label>
+          <label>
+            Use Case:
+            <textarea name="useCase" value={formState.useCase} onChange={handleInputChange} />
+          </label>
+        </form>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button variant="secondary" onClick={close}>
+          Close
+        </Button>
+        <Button variant="primary" onClick={sendEmail}>
+          Send email
+        </Button>
+      </Modal.Footer>
+    </Modal>
   );
 };
 
