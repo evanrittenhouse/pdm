@@ -48,11 +48,11 @@ const ContactUsModal = ({ shown, stateFunc, modalRef, closeButtonRef }: ContactM
   };
 
   const sendEmail = () => {
-    fetch('http://localhost:9000/testApi').then((response) => {
+    fetch('http://localhost:9000/email').then((response) => {
       if (!response.ok) {
         throw new Error(response.statusText);
       } else {
-        console.log('done');
+        console.log(response);
       }
       return;
     });
