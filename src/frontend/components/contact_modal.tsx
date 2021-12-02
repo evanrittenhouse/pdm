@@ -51,8 +51,9 @@ const ContactUsModal = ({ shown, stateFunc, modalRef, closeButtonRef }: ContactM
     fetch('http://localhost:9000/testApi').then((response) => {
       if (!response.ok) {
         throw new Error(response.statusText);
+      } else {
+        console.log('done');
       }
-      console.log('done');
       return;
     });
   };
