@@ -5,7 +5,6 @@ interface ContactModalProps {
   shown: boolean;
   stateFunc: Function;
   modalRef: any;
-  closeButtonRef: any;
 }
 
 // interface for creating and sending email
@@ -17,13 +16,19 @@ interface FormProps {
   useCase: string;
 }
 
-const ContactUsModal = ({ shown, stateFunc, modalRef, closeButtonRef }: ContactModalProps) => {
+interface EmailProps {
+  test: string;
+}
+
+const ContactUsModal = ({ shown, stateFunc, modalRef }: ContactModalProps) => {
   const [formState, setFormState] = useState<FormProps>({
     returnAddress: '',
     returnName: '',
     subjectCompany: '',
     useCase: '',
   });
+
+  const [emailState, setEmailState] = useState<EmailProps>({ test: '' });
 
   useEffect(() => {
     document.addEventListener('keydown', onKeyDown, false);
@@ -48,11 +53,20 @@ const ContactUsModal = ({ shown, stateFunc, modalRef, closeButtonRef }: ContactM
   };
 
   const sendEmail = () => {
-    fetch('http://localhost:9000/email').then((response) => {
+    fetch('http://localhost:9000/email').then(async (response) => {
       if (!response.ok) {
         throw new Error(response.statusText);
       } else {
-        console.log(response);
+        // let res: Promise<string> = await response.json();
+
+        // setTestState(res);
+        let test = await response.json();
+        console.log(test);
+
+        const newState: EmailProps = {
+          test: 'hello',
+        };
+        setEmailState(newState);
       }
       return;
     });
@@ -91,6 +105,7 @@ const ContactUsModal = ({ shown, stateFunc, modalRef, closeButtonRef }: ContactM
         <Button variant="primary" onClick={sendEmail}>
           Send email
         </Button>
+        <p>{emailState.test}</p>
       </Modal.Footer>
     </Modal>
   );
