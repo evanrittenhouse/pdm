@@ -86,3 +86,9 @@ body {
   border-top: 3px solid var(--main-color);
   border-radius: 5px;
 }
+
+/* contact us modal */
+.modal-text-input {
+  margin: 7px;
+  padding: 5px;
+}

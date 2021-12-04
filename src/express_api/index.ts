@@ -1,6 +1,6 @@
 import express, { Application, Request, Response } from 'express';
 import cors from 'cors';
-
+import { EmailSendApiResponse, FormInputProps } from '../frontend/components/contact_modal';
 const app: Application = express();
 const port: number = 9000;
 
@@ -8,6 +8,7 @@ const port: number = 9000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
+app.use(require('body-parser').urlencoded({ extended: false }));
 
 app.get('/', async (req: Request, res: Response): Promise<Response> => {
   return res.status(200).send({
@@ -17,11 +18,17 @@ app.get('/', async (req: Request, res: Response): Promise<Response> => {
 
 app.get('/email', (req: Request, res: Response): Response<String> => {
   return res.status(200).send({
-    message: 'test',
+    message: 'test from get request',
   });
 });
 
-app.get('/');
+app.post('/testPost', (req: Request, res: Response) => {
+  let x: any = req.body;
+  res.json(x);
+  console.log(x);
+
+  return res.status(200).send({});
+});
 
 try {
   app.listen(port, (): void => {

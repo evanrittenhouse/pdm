@@ -8,7 +8,7 @@ interface ContactModalProps {
 }
 
 // interface for creating and sending email
-interface FormProps {
+interface FormInputProps {
   [key: string]: string | number;
   returnAddress: string;
   returnName: string;
@@ -16,39 +16,42 @@ interface FormProps {
   useCase: string;
 }
 
-interface EmailProps {
-  test: string;
+interface EmailSendApiResponseProps {
+  message: string;
+  success?: string;
+  failure?: string;
 }
 
 const ContactUsModal = ({ shown, stateFunc, modalRef }: ContactModalProps) => {
-  const [formState, setFormState] = useState<FormProps>({
+  const [formState, setFormState] = useState<FormInputProps>({
     returnAddress: '',
     returnName: '',
     subjectCompany: '',
     useCase: '',
   });
 
-  const [emailState, setEmailState] = useState<EmailProps>({ test: '' });
+  const [emailState, setEmailState] = useState<EmailSendApiResponseProps>({ message: '' });
 
+  // use escape to close modal
+  const onKeyDown = (event: KeyboardEvent): void => {
+    if (event.key === 'Escape') stateFunc(false);
+  };
   useEffect(() => {
     document.addEventListener('keydown', onKeyDown, false);
-
     return () => {
       document.removeEventListener('keydown', onKeyDown, false);
     };
   });
 
+  // convenience function for closing modal
   const close = (): void => stateFunc(false);
-  const onKeyDown = (event: KeyboardEvent): void => {
-    if (event.key === 'Escape') stateFunc(false);
-  };
 
   const handleInputChange = (e: any): void => {
     const { name, value } = e.currentTarget as HTMLInputElement | HTMLTextAreaElement;
 
     setFormState({
       ...formState,
-      [name]: value,
+      [name]: value, // note the [key] in FormInputProps - this allows for variable setting in the props themselves
     });
   };
 
@@ -58,13 +61,10 @@ const ContactUsModal = ({ shown, stateFunc, modalRef }: ContactModalProps) => {
         throw new Error(response.statusText);
       } else {
         // let res: Promise<string> = await response.json();
+        let res = await response.json();
 
-        // setTestState(res);
-        let test = await response.json();
-        console.log(test);
-
-        const newState: EmailProps = {
-          test: 'hello',
+        const newState: EmailSendApiResponseProps = {
+          message: res,
         };
         setEmailState(newState);
       }
@@ -82,19 +82,19 @@ const ContactUsModal = ({ shown, stateFunc, modalRef }: ContactModalProps) => {
         <form>
           <label>
             Name:
-            <input name="returnName" type="text" value={formState.returnName} onChange={handleInputChange} />
+            <input name="returnName" className="modal-text-input" type="text" value={formState.returnName} onChange={handleInputChange} />
           </label>
           <label>
             Company Name:
-            <input name="subjectCompany" type="text" value={formState.subjectCompany} onChange={handleInputChange} />
+            <input name="subjectCompany" className="modal-text-input" type="text" value={formState.subjectCompany} onChange={handleInputChange} />
           </label>
           <label>
             Contact Email:
-            <input name="returnAddress" type="text" value={formState.returnAddress} onChange={handleInputChange} />
+            <input name="returnAddress" className="modal-text-input" type="text" value={formState.returnAddress} onChange={handleInputChange} />
           </label>
           <label>
             Use Case:
-            <textarea name="useCase" value={formState.useCase} onChange={handleInputChange} />
+            <textarea name="useCase" className="modal-text-input" value={formState.useCase} onChange={handleInputChange} />
           </label>
         </form>
       </Modal.Body>
@@ -105,10 +105,11 @@ const ContactUsModal = ({ shown, stateFunc, modalRef }: ContactModalProps) => {
         <Button variant="primary" onClick={sendEmail}>
           Send email
         </Button>
-        <p>{emailState.test}</p>
+        <p>{emailState.message}</p>
       </Modal.Footer>
     </Modal>
   );
 };
 
 export default ContactUsModal;
+export type { FormInputProps, EmailSendApiResponseProps };

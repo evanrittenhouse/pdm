@@ -32,7 +32,7 @@ function HeaderTyping({ string }: HeaderTypingProps) {
     };
   }, [string]);
 
-  return <span className='App-header' style={{ whiteSpace: 'pre', width: '100%' }} ref={elRef} />;
+  return <span className="App-header" style={{ whiteSpace: 'pre', width: '100%', marginTop: '0px' }} ref={elRef} />;
 }
 
 export default HeaderTyping;
