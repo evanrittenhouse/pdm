@@ -1,6 +1,8 @@
 import express, { Application, Request, Response } from 'express';
 import cors from 'cors';
-import { EmailSendApiResponse, FormInputProps } from '../frontend/components/contact_modal';
+import { EmailApiGetResponseProps, FormInputProps } from '../frontend/components/contact_modal';
+import * as nodemailer from 'nodemailer';
+
 const app: Application = express();
 const port: number = 9000;
 
@@ -17,17 +19,53 @@ app.get('/', async (req: Request, res: Response): Promise<Response> => {
 });
 
 app.get('/email', (req: Request, res: Response): Response<String> => {
-  return res.status(200).send({
-    message: 'test from get request',
-  });
+  try {
+    return res.status(200).send({
+      message: 'test from get request',
+    });
+  } catch (error: any) {
+    return res.status(500).send({
+      message: 'internal server error',
+    });
+  }
 });
 
-app.post('/testPost', (req: Request, res: Response) => {
-  let x: any = req.body;
-  res.json(x);
-  console.log(x);
+app.post('/testPost', async (req: Request, res: Response) => {
+  const formInput: FormInputProps = req.body;
 
-  return res.status(200).send({});
+  const emailSubject: string = `New Business - ${formInput.subjectCompany}`;
+  const returnName: string = formInput.returnName;
+  const returnAddress: string = formInput.returnAddress;
+  const useCase: string = formInput.useCase;
+  const user: string = 'test';
+  const pass: string = 'test';
+
+  const transporter: nodemailer.Transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 587,
+    secure: false,
+    auth: {
+      user: 'pdm.new.business@gmail.com',
+      pass: '6bG;v~B5YN-X>GGT',
+    },
+  });
+
+  const messageBody: string = `
+    Sender name: ${returnName}\n
+    Return address: ${returnAddress}\n
+    Use case/business request: ${useCase}
+  `;
+
+  const messageInfo: Promise<any> = transporter.sendMail({
+    from: 'New Business Request',
+    to: 'evanrittenhouse@gmail.com',
+    subject: emailSubject,
+    text: messageBody,
+  });
+
+  console.log(messageInfo);
+
+  return res.status(200).send({ message: 'test post' });
 });
 
 try {
