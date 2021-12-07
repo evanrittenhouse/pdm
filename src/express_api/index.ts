@@ -30,15 +30,13 @@ app.get('/email', (req: Request, res: Response): Response<String> => {
   }
 });
 
-app.post('/testPost', async (req: Request, res: Response) => {
+app.post('/sendEmail', async (req: Request, res: Response) => {
   const formInput: FormInputProps = req.body;
 
   const emailSubject: string = `New Business - ${formInput.subjectCompany}`;
   const returnName: string = formInput.returnName;
   const returnAddress: string = formInput.returnAddress;
   const useCase: string = formInput.useCase;
-  const user: string = 'test';
-  const pass: string = 'test';
 
   const transporter: nodemailer.Transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
@@ -50,22 +48,22 @@ app.post('/testPost', async (req: Request, res: Response) => {
     },
   });
 
-  const messageBody: string = `
-    Sender name: ${returnName}\n
-    Return address: ${returnAddress}\n
-    Use case/business request: ${useCase}
-  `;
+  //   const messageBody: string = `
+  //     Sender name: ${returnName}\n
+  //     Return address: ${returnAddress}\n
+  //     Use case/business request: ${useCase}
+  //   `;
 
-  const messageInfo: Promise<any> = transporter.sendMail({
-    from: 'New Business Request',
-    to: 'evanrittenhouse@gmail.com',
-    subject: emailSubject,
-    text: messageBody,
-  });
+  //   const messageInfo: Promise<any> = transporter.sendMail({
+  //     from: 'New Business Request',
+  //     to: 'evanrittenhouse@gmail.com', // info@pdm-inc.com for PDM forwarder (john_beaulieu@pdm-inc.com)
+  //     subject: emailSubject,
+  //     text: messageBody,
+  //   });
 
-  console.log(messageInfo);
+  // console.log(messageInfo);
 
-  return res.status(200).send({ message: 'test post' });
+  return res.status(200).send({ sent: true, message: 'success' });
 });
 
 try {
