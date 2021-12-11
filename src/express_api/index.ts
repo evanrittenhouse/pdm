@@ -48,20 +48,20 @@ app.post('/sendEmail', async (req: Request, res: Response) => {
     },
   });
 
-  //   const messageBody: string = `
-  //     Sender name: ${returnName}\n
-  //     Return address: ${returnAddress}\n
-  //     Use case/business request: ${useCase}
-  //   `;
+  const messageBody: string = `
+      Sender name: ${returnName}\n
+      Return address: ${returnAddress}\n
+      Use case/business request: ${useCase}
+    `;
 
-  //   const messageInfo: Promise<any> = transporter.sendMail({
-  //     from: 'New Business Request',
-  //     to: 'evanrittenhouse@gmail.com', // info@pdm-inc.com for PDM forwarder (john_beaulieu@pdm-inc.com)
-  //     subject: emailSubject,
-  //     text: messageBody,
-  //   });
+  const messageInfo: Promise<any> = transporter.sendMail({
+    from: 'New Business Request',
+    to: 'evanrittenhouse@gmail.com', // info@pdm-inc.com for PDM forwarder (john_beaulieu@pdm-inc.com)
+    subject: emailSubject,
+    text: messageBody,
+  });
 
-  // console.log(messageInfo);
+  console.log(messageInfo);
 
   return res.status(200).send({ sent: true, message: 'success' });
 });
