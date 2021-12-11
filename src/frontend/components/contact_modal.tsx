@@ -20,6 +20,7 @@ interface FormInputProps {
 // response from server
 interface EmailApiGetResponseProps {
   message: string;
+  sent?: boolean;
   success?: string;
   failure?: string;
 }
@@ -30,30 +31,55 @@ interface FormInputComponentProps {
   onChangeHandler: Function;
 }
 
-// const FormInput = ({ formInputProps, onChangeHandler }: FormInputComponentProps) => {
-//   return (
-//     <form>
-//       <label>
-//         Name:
-//         <input name="returnName" className="modal-text-input" type="text" value={formInputProps.returnName} onChange={onChangeHandler} />
-//       </label>
-//       <label>
-//         Company Name:
-//         <input name="subjectCompany" className="modal-text-input" type="text" value={formInputProps.subjectCompany} onChange={onChangeHandler} />
-//       </label>
-//       <label>
-//         Contact Email:
-//         <input name="returnAddress" className="modal-text-input" type="text" value={formInputProps.returnAddress} onChange={onChangeHandler} />
-//       </label>
-//       <label>
-//         Use Case:
-//         <textarea name="useCase" className="modal-text-input" value={formInputProps.useCase} onChange={onChangeHandler} />
-//       </label>
-//     </form>
-//   );
-// };
+// before email send - form input
+const FormInput = ({ formInputProps, onChangeHandler }: FormInputComponentProps) => {
+  const onChangeHandlerLocal = () => {
+    console.log('onChangeHandlerLocal');
+    // the return statement isn't happening - ie onChangeHandlerLocalReturnStatement isn't printing
+    return (event: React.KeyboardEvent) => {
+      console.log('onChangeHandlerLocalReturnStatement');
+      onChangeHandler(event);
+    };
+  };
 
-const ContactUsModal = ({ shown, stateFunc, modalRef }: ContactModalProps) => {
+  return (
+    <form>
+      <input
+        name="returnName"
+        placeholder="Your Name..."
+        className="modal-text-input"
+        type="text"
+        value={formInputProps.returnName}
+        onChange={onChangeHandlerLocal}
+      />
+      <input
+        name="subjectCompany"
+        placeholder="Company Name..."
+        className="modal-text-input"
+        type="text"
+        value={formInputProps.subjectCompany}
+        onChange={onChangeHandlerLocal}
+      />
+      <input
+        name="returnAddress"
+        placeholder="Contact Email..."
+        className="modal-text-input"
+        type="text"
+        value={formInputProps.returnAddress}
+        onChange={onChangeHandlerLocal}
+      />
+      <textarea
+        name="useCase"
+        placeholder="Use Case..."
+        className="modal-text-input modal-text-area"
+        value={formInputProps.useCase}
+        onChange={onChangeHandlerLocal}
+      />
+    </form>
+  );
+};
+
+const ContactUsModal = ({ shown, stateFunc, modalRef }: ContactModalProps): JSX.Element => {
   const [formState, setFormState] = useState<FormInputProps>({
     returnAddress: '',
     returnName: '',
@@ -105,30 +131,23 @@ const ContactUsModal = ({ shown, stateFunc, modalRef }: ContactModalProps) => {
       </Modal.Header>
       <Modal.Body onClick={(e: MouseEvent) => e.stopPropagation()}>
         Tell us how we can build the perfect database structure for your business.
-        <form>
-          <label>
-            Name:
-            <input name="returnName" className="modal-text-input" type="text" value={formState.returnName} onChange={handleInputChange} />
-          </label>
-          <label>
-            Company Name:
-            <input name="subjectCompany" className="modal-text-input" type="text" value={formState.subjectCompany} onChange={handleInputChange} />
-          </label>
-          <label>
-            Contact Email:
-            <input name="returnAddress" className="modal-text-input" type="text" value={formState.returnAddress} onChange={handleInputChange} />
-          </label>
-          <label>
-            Use Case:
-            <textarea name="useCase" className="modal-text-input" value={formState.useCase} onChange={handleInputChange} />
-          </label>
-        </form>
+        <FormInput
+          formInputProps={formState}
+          onChangeHandler={handleInputChange}
+          // {
+          //   emailState.sent === false ? <FormInput formInputProps={formState} onChangeHandler={handleInputChange} /> : null
+          //   // ) : emailState.message === 'success' ? (
+          //   //   'success'
+          //   // ) : (
+          //   //   'failure')
+          // }
+        />
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={close}>
+        <Button className="modal-button modal-close-button" onClick={close}>
           Close
         </Button>
-        <Button variant="primary" onClick={sendEmail}>
+        <Button className="modal-button modal-send-button" onClick={sendEmail}>
           Send email
         </Button>
         <p>{emailState.message}</p>
@@ -136,29 +155,6 @@ const ContactUsModal = ({ shown, stateFunc, modalRef }: ContactModalProps) => {
     </Modal>
   );
 };
-// <FormInput formInputProps={formState} onChangeHandler={handleInputChange} />
 
 export default ContactUsModal;
 export type { FormInputProps, EmailApiGetResponseProps };
-
-// const sendEmail = () => {
-//   const requestOptions = {
-//     method: 'POST',
-//     body: JSON.stringify(formState),
-//   };
-
-//   fetch('http://localhost:9000/testPost', requestOptions).then(async (response) => {
-//     if (!response.ok) {
-//       throw new Error(response.statusText);
-//     } else {
-//       // let res: Promise<string> = await response.json();
-//       let res = await response.json();
-
-//       const newState: EmailApiGetResponseProps = {
-//         message: res.message,
-//       };
-//       setEmailState(newState);
-//     }
-//     return;
-//   });
-// };

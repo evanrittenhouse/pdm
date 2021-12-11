@@ -91,4 +91,32 @@ body {
 .modal-text-input {
   margin: 7px;
   padding: 5px;
+  border: 1px solid lightgrey;
+  border-radius: 10px;
+  width: 100%;
+}
+
+.modal-text-area {
+  border: 2px solid lightgrey;
+  border-radius: 10px;
+  width: 100%;
+}
+
+.modal-button {
+  transition: all 0.2s ease-in-out;
+}
+
+.modal-button:hover {
+  transform: scale(1.05);
+}
+
+.modal-send-button {
+  background-color: var(--main-color);
+  border-color: var(--main-color);
+}
+
+.modal-close-button {
+  background-color: white;
+  color: var(--main-color);
+  border-color: var(--main-color);
 }
