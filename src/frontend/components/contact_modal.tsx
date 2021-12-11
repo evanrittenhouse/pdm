@@ -33,14 +33,7 @@ interface FormInputComponentProps {
 
 // before email send - form input
 const FormInput = ({ formInputProps, onChangeHandler }: FormInputComponentProps) => {
-  const onChangeHandlerLocal = () => {
-    console.log('onChangeHandlerLocal');
-    // the return statement isn't happening - ie onChangeHandlerLocalReturnStatement isn't printing
-    return (event: React.KeyboardEvent) => {
-      console.log('onChangeHandlerLocalReturnStatement');
-      onChangeHandler(event);
-    };
-  };
+  const onChangeHandlerLocal = (event: any) => onChangeHandler(event);
 
   return (
     <form>
@@ -71,7 +64,7 @@ const FormInput = ({ formInputProps, onChangeHandler }: FormInputComponentProps)
       <textarea
         name="useCase"
         placeholder="Use Case..."
-        className="modal-text-input modal-text-area"
+        className="modal-text-input"
         value={formInputProps.useCase}
         onChange={onChangeHandlerLocal}
       />
@@ -80,18 +73,22 @@ const FormInput = ({ formInputProps, onChangeHandler }: FormInputComponentProps)
 };
 
 const ContactUsModal = ({ shown, stateFunc, modalRef }: ContactModalProps): JSX.Element => {
-  const [formState, setFormState] = useState<FormInputProps>({
+  const initialFormState: FormInputProps = {
     returnAddress: '',
     returnName: '',
     subjectCompany: '',
     useCase: '',
-  });
+  };
+
+  const [formState, setFormState] = useState<FormInputProps>(initialFormState);
   const [emailState, setEmailState] = useState<EmailApiGetResponseProps>({ message: '' });
 
   // use escape to close modal
   const onKeyDown = (event: KeyboardEvent): void => {
     if (event.key === 'Escape') stateFunc(false);
   };
+
+  // add escape listeners
   useEffect(() => {
     document.addEventListener('keydown', onKeyDown, false);
     return () => {
@@ -99,6 +96,7 @@ const ContactUsModal = ({ shown, stateFunc, modalRef }: ContactModalProps): JSX.
     };
   });
 
+  // change the internal form state depending on the input text
   const handleInputChange = (e: any): void => {
     const { name, value } = e.currentTarget as HTMLInputElement | HTMLTextAreaElement;
     setFormState({
@@ -144,7 +142,7 @@ const ContactUsModal = ({ shown, stateFunc, modalRef }: ContactModalProps): JSX.
         />
       </Modal.Body>
       <Modal.Footer>
-        <Button className="modal-button modal-close-button" onClick={close}>
+        <Button className="modal-button modal-close-button outline-secondary" onClick={close}>
           Close
         </Button>
         <Button className="modal-button modal-send-button" onClick={sendEmail}>

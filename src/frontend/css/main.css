@@ -89,16 +89,10 @@ body {
 
 /* contact us modal */
 .modal-text-input {
-  margin: 7px;
-  padding: 5px;
+  padding: 7px;
+  margin: 8px 0px 8px;
   border: 1px solid lightgrey;
-  border-radius: 10px;
-  width: 100%;
-}
-
-.modal-text-area {
-  border: 2px solid lightgrey;
-  border-radius: 10px;
+  border-radius: 5px;
   width: 100%;
 }
 
@@ -107,7 +101,8 @@ body {
 }
 
 .modal-button:hover {
-  transform: scale(1.05);
+  transform: scale(1.1);
+  background-color: var(--main-color);
 }
 
 .modal-send-button {
@@ -116,6 +111,12 @@ body {
 }
 
 .modal-close-button {
+  background-color: white;
+  color: var(--main-color);
+  border-color: var(--main-color);
+}
+
+.modal-close-button:hover {
   background-color: white;
   color: var(--main-color);
   border-color: var(--main-color);
