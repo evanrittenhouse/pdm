@@ -82,6 +82,7 @@ const ContactUsModal = ({ shown, stateFunc, modalRef }: ContactModalProps): JSX.
 
   const [formState, setFormState] = useState<FormInputProps>(initialFormState);
   const [emailState, setEmailState] = useState<EmailApiGetResponseProps>({ message: '' });
+  const [emailSentState, setEmailSentState] = useState<boolean>(false);
 
   // use escape to close modal
   const onKeyDown = (event: KeyboardEvent): void => {
@@ -122,6 +123,19 @@ const ContactUsModal = ({ shown, stateFunc, modalRef }: ContactModalProps): JSX.
     });
   };
 
+  // function which controls layout of the modal dialog depending on if the email has been sent/success or failure of sending
+  const modalContentRouter = (): JSX.Element | string => {
+    if (emailSentState === false) {
+      return <FormInput formInputProps={formState} onChangeHandler={handleInputChange} />;
+    } else {
+      if (emailState.message === 'success') {
+        return 'success';
+      } else {
+        return 'failure';
+      }
+    }
+  };
+
   return (
     <Modal show={shown} ref={modalRef}>
       <Modal.Header closeButton>
@@ -129,20 +143,10 @@ const ContactUsModal = ({ shown, stateFunc, modalRef }: ContactModalProps): JSX.
       </Modal.Header>
       <Modal.Body onClick={(e: MouseEvent) => e.stopPropagation()}>
         Tell us how we can build the perfect database structure for your business.
-        <FormInput
-          formInputProps={formState}
-          onChangeHandler={handleInputChange}
-          // {
-          //   emailState.sent === false ? <FormInput formInputProps={formState} onChangeHandler={handleInputChange} /> : null
-          //   // ) : emailState.message === 'success' ? (
-          //   //   'success'
-          //   // ) : (
-          //   //   'failure')
-          // }
-        />
+        {modalContentRouter()}
       </Modal.Body>
       <Modal.Footer>
-        <Button className="modal-button modal-close-button outline-secondary" onClick={close}>
+        <Button className="modal-button modal-close-button" onClick={close}>
           Close
         </Button>
         <Button className="modal-button modal-send-button" onClick={sendEmail}>
@@ -156,3 +160,11 @@ const ContactUsModal = ({ shown, stateFunc, modalRef }: ContactModalProps): JSX.
 
 export default ContactUsModal;
 export type { FormInputProps, EmailApiGetResponseProps };
+
+// {
+//   emailState.sent === false ? <FormInput formInputProps={formState} onChangeHandler={handleInputChange} /> : null
+//   // ) : emailState.message === 'success' ? (
+//   //   'success'
+//   // ) : (
+//   //   'failure')
+// }

@@ -30,7 +30,7 @@ app.get('/email', (req: Request, res: Response): Response<String> => {
   }
 });
 
-app.post('/sendEmail', async (req: Request, res: Response) => {
+app.post('/sendEmail', async (req: Request, res: Response): Promise<Response<EmailApiGetResponseProps>> => {
   const formInput: FormInputProps = req.body;
 
   const emailSubject: string = `New Business - ${formInput.subjectCompany}`;
