@@ -129,9 +129,9 @@ const ContactUsModal = ({ shown, stateFunc, modalRef }: ContactModalProps): JSX.
       return <FormInput formInputProps={formState} onChangeHandler={handleInputChange} />;
     } else {
       if (emailState.message === 'success') {
-        return 'success';
+        return "Thank you! Your request has been sent and we'll be in touch shortly.";
       } else {
-        return 'failure';
+        return "There's been an error with sending your request - please try again or call us at (408)-283-5900.";
       }
     }
   };
@@ -160,11 +160,3 @@ const ContactUsModal = ({ shown, stateFunc, modalRef }: ContactModalProps): JSX.
 
 export default ContactUsModal;
 export type { FormInputProps, EmailApiGetResponseProps };
-
-// {
-//   emailState.sent === false ? <FormInput formInputProps={formState} onChangeHandler={handleInputChange} /> : null
-//   // ) : emailState.message === 'success' ? (
-//   //   'success'
-//   // ) : (
-//   //   'failure')
-// }
